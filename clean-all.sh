@@ -2,6 +2,9 @@
 
 clean_branch()
 {
+    if ! git rev-parse --verify "$1" > /dev/null 2>&1; then
+        return
+    fi
     git checkout "$1"
     git merge --abort > /dev/null 2>&1
     git rebase --abort > /dev/null 2>&1
